@@ -199,7 +199,8 @@ public class MainActivity extends BrowserActivity implements ExternalPlayerWithR
     }
 
     public void setBackground() {
-        int backgroundResId = PrivateMode.isActive() ? R.drawable.background_2014_dark : R.drawable.background_2014;
+        // int backgroundResId = PrivateMode.isActive() ? R.drawable.background_2014_dark : R.drawable.background_2014;
+        int backgroundResId = R.color.side_bar_background;
         getWindow().getDecorView().setBackgroundResource(backgroundResId);
         if(mDrawerLayout != null)
             mDrawerLayout.findViewById(R.id.category_container).setBackgroundResource(backgroundResId);

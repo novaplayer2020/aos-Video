@@ -68,4 +68,6 @@
     <color name="ccl_mini_upcoming_background">@color/primary</color>
 
     <color name="private_mode">#01142A</color>
+
+    <color name="side_bar_background">#001220</color>
 </resources>

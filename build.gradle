@@ -10,7 +10,7 @@ buildscript {
 }
 
 plugins {
-    id "com.github.triplet.play" version "2.3.0"
+    id "com.github.triplet.play" version "2.7.2"
 }
 
 import com.android.build.OutputFile
@@ -232,8 +232,4 @@ dependencies {
     implementation 'androidx.leanback:leanback-preference:1.1.0-alpha03'
     implementation 'androidx.tvprovider:tvprovider:1.0.0'
     implementation 'fr.turri:aXMLRPC:1.12.0'
-    //implementation 'com.github.wtekiela:opensub4j:0.2.3'
-    implementation('com.github.wtekiela:opensub4j:0.2.3') {
-        exclude group: 'junit', module: 'junit'
-    }
 }

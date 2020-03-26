@@ -134,7 +134,7 @@
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
         <item name="android:scrollHorizontally">true</item>
-        <item name="android:textColor">@color/lightblue500</item>
+        <item name="android:textColor">@color/lightOrange500</item>
     </style>
 
     <style name="BrowserText.Details" parent="MainLine">
@@ -157,7 +157,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textColor">@color/lightblue500</item>
+        <item name="android:textColor">@color/lightOrange500</item>
     </style>
 
     <style name="BrowserText.Name.Video">
@@ -197,7 +197,7 @@
     <style name="CoverDescription.Duration">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/cover_description_floating_small</item>
-        <item name="android:textColor">@color/lightblue500</item>
+        <item name="android:textColor">@color/lightOrange500</item>
     </style>
 
     <style name="CoverDescription.Overlay">
@@ -266,7 +266,7 @@
     </style>
 
     <style name="VideoInfoFileInfo.Title">
-        <item name="android:textColor">@color/lightblue500</item>
+        <item name="android:textColor">@color/lightOrange500</item>
         <item name="android:drawablePadding">4dip</item>
     </style>
 

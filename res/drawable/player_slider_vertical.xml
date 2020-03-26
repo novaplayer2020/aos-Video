@@ -42,7 +42,7 @@
             <shape android:shape="rectangle" >
                 <corners android:radius="8dip" />
 
-                <solid android:color="@color/lightblue500" />
+                <solid android:color="@color/lightOrange500" />
             </shape>
         </scale>
     </item>

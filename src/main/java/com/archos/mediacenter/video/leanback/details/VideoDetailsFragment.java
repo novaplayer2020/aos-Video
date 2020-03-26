@@ -147,7 +147,7 @@ import java.util.List;
 public class VideoDetailsFragment extends DetailsFragmentWithLessTopOffset implements LoaderManager.LoaderCallbacks<Cursor>, PlayUtils.SubtitleDownloadListener, SubtitleInterface, Delete.DeleteListener, XmlDb.ResumeChangeListener, ExternalPlayerWithResultStarter {
 
     private static final String TAG = "VideoDetailsFragment";
-    private static boolean DBG = true;
+    private static boolean DBG = false;
 
     /** A serialized com.archos.mediacenter.video.leanback.adapter.object.Video */
     public static final String EXTRA_VIDEO = "VIDEO";
@@ -1723,6 +1723,17 @@ public class VideoDetailsFragment extends DetailsFragmentWithLessTopOffset imple
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            /*
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setCancelable(false);
+            View dialogView = inflater.inflate(R.layout.dialog_signin, null);
+            builder.setView(R.layout.progressbar_dialog);
+            final AlertDialog mProgressBarAlertDialog = builder.create();
+             */
+
+
+
             ProgressDialog pd = new ProgressDialog(getActivity());
             pd.setMessage(getString(R.string.dialog_subloader_copying));
             pd.setIndeterminate(true);

@@ -9,10 +9,12 @@
     android:gravity="center_vertical"
     android:clickable="false"
     android:focusable="false"
-    android:paddingLeft="8dip"
-    android:paddingRight="8dip"
-    android:background="@drawable/category_title_background"
 
-    android:textColor="@color/lightblue500"
+    android:background="@drawable/category_title_background"
+    android:textColor="@color/lightOrange500"
     android:singleLine="true"
-     />
+    android:textStyle="bold"
+    android:textSize="18sp"
+    android:paddingLeft="16dip"
+    android:paddingRight="16dip"
+    />
