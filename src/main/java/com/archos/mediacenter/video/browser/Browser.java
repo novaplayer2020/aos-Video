@@ -498,7 +498,7 @@ public abstract class Browser extends Fragment implements AbsListView.OnScrollLi
                 mRootView.findViewById(R.id.archos_list_view).setVisibility(View.GONE);
                 mArchosGridView.setVisibility(View.VISIBLE);
                 if(mArchosGridView instanceof GridView)
-                    ((GridView)mArchosGridView).setNumColumns(GridView.AUTO_FIT);
+                    ((GridView)mArchosGridView).setNumColumns(3);
                 verticalSpacing = res.getDimensionPixelSize(R.dimen.content_grid_vertical_spacing_between_items);
                 // setHorizontalSpacing() doesn't allow to have well-centered column. Having larger
                 // columns and making sure the items are centered in it makes it.
