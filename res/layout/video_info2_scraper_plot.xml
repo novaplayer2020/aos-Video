@@ -9,7 +9,6 @@
     android:layout_marginTop="@dimen/video_info_cardview_top_margin"
     card_view:cardCornerRadius="4dp"
     android:id="@+id/scraper_plot_cardview"
-
     android:layout_height="wrap_content"
     >
     <LinearLayout
@@ -59,7 +58,7 @@
 
 
         <TextView
-            android:id="@+id/scrap_plot"
+            android:id="@+id/producer"
             style="@style/VideoInfoFileInfo"
             android:textStyle="italic" />
         <TextView

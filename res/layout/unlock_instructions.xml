@@ -19,7 +19,7 @@
         android:shadowDy="1"
         android:shadowRadius="2"
         android:paddingLeft="10dp"
-        android:id="@+id/textView"
+        android:id="@+id/tv_movie_title"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/unlock_button"
         android:layout_toRightOf="@+id/unlock_button"

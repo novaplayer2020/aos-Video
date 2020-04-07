@@ -94,7 +94,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/scrap_plot"
+        android:id="@+id/producer"
         style="@style/VideoInfoFileInfo"
         android:paddingBottom="10dip"
         android:textStyle="italic" />
