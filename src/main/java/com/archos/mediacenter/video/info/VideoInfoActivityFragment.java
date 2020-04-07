@@ -398,7 +398,7 @@ public class VideoInfoActivityFragment extends Fragment implements LoaderManager
         mTMDBIcon = mRoot.findViewById(R.id.scrap_link_tmdb);
         mTMDBIcon.setOnClickListener(this);
         mScraperPlotContainer = (CardView)mRoot.findViewById(R.id.scraper_plot_container);
-        mPlotTextView = (TextView) mRoot.findViewById(R.id.scrap_plot);
+        mPlotTextView = (TextView) mRoot.findViewById(R.id.producer);
         mGenreTextView = (TextView) mRoot.findViewById(R.id.scrap_genre);
         mCastTextView = (TextView) mRoot.findViewById(R.id.scrap_cast);
         mCastTextViewTitle = (TextView) mRoot.findViewById(R.id.scrap_cast_title);

@@ -17,6 +17,7 @@ package com.archos.mediacenter.video.browser;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -40,6 +41,8 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -109,6 +112,7 @@ import com.archos.mediaprovider.video.VideoStore;
 import com.archos.mediaprovider.video.VideoStore.Video.VideoColumns;
 import com.archos.mediascraper.AutoScrapeService;
 
+import com.archos.mediacenter.video.R;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Locale;
@@ -207,11 +211,9 @@ public class MainActivity extends BrowserActivity implements ExternalPlayerWithR
     }
 
     private void setHomeButton() {
-
         int iconResId = PrivateMode.isActive() ? R.mipmap.video2_private : R.mipmap.video2;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
-
     }
 
     @Override
@@ -220,8 +222,14 @@ public class MainActivity extends BrowserActivity implements ExternalPlayerWithR
         requestWindowFeature(Window.FEATURE_OPTIONS_PANEL);
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         super.onCreate(savedInstanceState);
+
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.side_bar_background)));
+
+
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         if (mDrawerLayout != null){
             mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -537,6 +545,7 @@ public class MainActivity extends BrowserActivity implements ExternalPlayerWithR
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         boolean ret = super.onCreateOptionsMenu(menu);
         /// /setHomeButtonsetHomeButton();
         MenuItem item = menu.add(MENU_SEARCH_GROUP, MENU_SEARCH_ITEM, Menu.NONE, R.string.search_title);
@@ -558,6 +567,7 @@ public class MainActivity extends BrowserActivity implements ExternalPlayerWithR
         menuItem = menu.add(MENU_PRIVATE_MODE_GROUP, MENU_PRIVATE_MODE_ITEM, Menu.CATEGORY_SECONDARY, R.string.activate_private_mode);
         menuItem.setIcon(R.drawable.ic_menu_private_mode);
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
 
         return ret;
     }
