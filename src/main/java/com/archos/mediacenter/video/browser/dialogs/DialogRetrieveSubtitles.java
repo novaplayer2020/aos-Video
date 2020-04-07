@@ -52,7 +52,7 @@ public class DialogRetrieveSubtitles extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCanceledOnTouchOutside(true);
         setCancelable(true);
-        TextView textView = view.findViewById(R.id.textView);
+        TextView textView = view.findViewById(R.id.tv_movie_title);
         textView.setText(R.string.dialog_subloader_copying);
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
         progressBar.setIndeterminate(true);

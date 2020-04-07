@@ -92,8 +92,8 @@ public class TVCardDialog extends FrameLayout implements TVSlaveView  {
     public TVCardDialog getSlaveView(){ return slaveView; }
 
     public void setOnSwitchClickListener(OnClickListener ocl) {
-        if (findViewById(R.id.imageView) != null)
-            findViewById(R.id.imageView).setOnClickListener(ocl);
+        if (findViewById(R.id.iv_movie_big_thumbnail) != null)
+            findViewById(R.id.iv_movie_big_thumbnail).setOnClickListener(ocl);
         this.ocl = ocl;
     }
     public void setSlaveView(View slaveView){
@@ -203,8 +203,8 @@ public class TVCardDialog extends FrameLayout implements TVSlaveView  {
 
     public void setDrawable(Drawable d) {
 
-        if (findViewById(R.id.imageView) != null)
-            ((ImageView) findViewById(R.id.imageView)).setImageDrawable(d);
+        if (findViewById(R.id.iv_movie_big_thumbnail) != null)
+            ((ImageView) findViewById(R.id.iv_movie_big_thumbnail)).setImageDrawable(d);
     }
 
     @Override
@@ -222,7 +222,7 @@ public class TVCardDialog extends FrameLayout implements TVSlaveView  {
 
     @Override
     public boolean hasFocus() {
-        if ((((ImageView) findViewById(R.id.imageView)) != null && ((ImageView) findViewById(R.id.imageView)).isFocused()))
+        if ((((ImageView) findViewById(R.id.iv_movie_big_thumbnail)) != null && ((ImageView) findViewById(R.id.iv_movie_big_thumbnail)).isFocused()))
             return true;
         if (others.size() > 0)
             for (int i = 0; i < others.size(); i++) {

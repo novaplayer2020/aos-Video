@@ -145,7 +145,7 @@ public class VideoInfoActivity extends AppCompatActivity {
         if (DBG) Log.d(TAG, "startInstance: " + currentVideo.getFilePath());
         Intent intent = new Intent(context, VideoInfoActivity.class);
         if(currentVideo!=null)
-            intent.putExtra(VideoInfoActivityFragment.EXTRA_VIDEO, currentVideo);
+            intent.putExtra(VideoInfoActivityFragment2.EXTRA_VIDEO, currentVideo);
         if(paths!=null)
             intent.putExtra(EXTRA_VIDEO_PATHS, paths);
         intent.putExtra(EXTRA_FORCE_VIDEO_SELECTION,forceVideoSelection);
@@ -196,7 +196,7 @@ public class VideoInfoActivity extends AppCompatActivity {
                 id = mId;
                 forceVideoSelection = mForceCurrentPosition;
             }
-            return VideoInfoActivityFragment.getInstance(video,mPaths.size()>0? mPaths.get(position):null, id, forceVideoSelection);
+            return VideoInfoActivityFragment2.getInstance(video,mPaths.size()>0? mPaths.get(position):null, id, forceVideoSelection);
         }
 
         @Override

@@ -54,7 +54,7 @@ public class DeleteDialog extends DialogFragment  {
         //dialog.requestWindowFeature(Window.FEATURE_LEFT_ICON);
         //dialog.setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.filetype_video);
 
-        TextView textView = view.findViewById(R.id.textView);
+        TextView textView = view.findViewById(R.id.tv_movie_title);
         textView.setText(R.string.deleting);
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
         progressBar.setIndeterminate(true);

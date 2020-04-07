@@ -212,7 +212,7 @@ public class TorrentLoaderActivity extends Activity implements TorrentThreadObse
         mProgressBarAlertDialog.show();
 
         // this can only be after the show otherwise null
-        TextView textView = mProgressBarAlertDialog.findViewById(R.id.textView);
+        TextView textView = mProgressBarAlertDialog.findViewById(R.id.tv_movie_title);
         textView.setText(R.string.loading_torrent);
         ProgressBar progressBar = mProgressBarAlertDialog.findViewById(R.id.progressBar);
         progressBar.setIndeterminate(true);

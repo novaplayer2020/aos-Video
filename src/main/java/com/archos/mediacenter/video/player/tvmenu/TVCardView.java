@@ -23,7 +23,6 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-import com.archos.environment.ArchosFeatures;
 import com.archos.mediacenter.video.R;
 import com.archos.mediacenter.video.player.FocusableTVCardView;
 
@@ -206,8 +205,8 @@ public class TVCardView extends FrameLayout implements Checkable, FocusableTVCar
     }
 
     public void setOnSwitchClickListener(OnClickListener ocl) {
-        if (findViewById(R.id.imageView) != null)
-            findViewById(R.id.imageView).setOnClickListener(ocl);
+        if (findViewById(R.id.iv_movie_big_thumbnail) != null)
+            findViewById(R.id.iv_movie_big_thumbnail).setOnClickListener(ocl);
         this.ocl = ocl;
     }
     public void setOnFocusOutListener(onFocusOutListener ofol){
@@ -322,8 +321,8 @@ public class TVCardView extends FrameLayout implements Checkable, FocusableTVCar
 
     public void setDrawable(Drawable d) {
 
-        if (findViewById(R.id.imageView) != null)
-            ((ImageView) findViewById(R.id.imageView)).setImageDrawable(d);
+        if (findViewById(R.id.iv_movie_big_thumbnail) != null)
+            ((ImageView) findViewById(R.id.iv_movie_big_thumbnail)).setImageDrawable(d);
     }
 
     @Override
@@ -340,7 +339,7 @@ public class TVCardView extends FrameLayout implements Checkable, FocusableTVCar
 
     @Override
     public boolean hasFocus() {
-        if ((((ImageView) findViewById(R.id.imageView)) != null && ((ImageView) findViewById(R.id.imageView)).isFocused()))
+        if ((((ImageView) findViewById(R.id.iv_movie_big_thumbnail)) != null && ((ImageView) findViewById(R.id.iv_movie_big_thumbnail)).isFocused()))
             return true;
         if (others.size() > 0)
             for (int i = 0; i < others.size(); i++) {
@@ -374,7 +373,7 @@ public class TVCardView extends FrameLayout implements Checkable, FocusableTVCar
 
     @Override
     public boolean saveFocus(final View sv) {
-        if ((((ImageView) findViewById(R.id.imageView)) != null && ((ImageView) findViewById(R.id.imageView)).isFocused())) {
+        if ((((ImageView) findViewById(R.id.iv_movie_big_thumbnail)) != null && ((ImageView) findViewById(R.id.iv_movie_big_thumbnail)).isFocused())) {
             lastFocused = -1;
             return true;
         }
@@ -390,8 +389,8 @@ public class TVCardView extends FrameLayout implements Checkable, FocusableTVCar
 
     @Override
     public void restoreFocus(ScrollView sv) {
-        if (lastFocused == -1 && findViewById(R.id.imageView) != null&&slaveView!=null)
-            findViewById(R.id.imageView).requestFocus();
+        if (lastFocused == -1 && findViewById(R.id.iv_movie_big_thumbnail) != null&&slaveView!=null)
+            findViewById(R.id.iv_movie_big_thumbnail).requestFocus();
         else {
             if (others.size() > lastFocused) {
                 if (others.get(lastFocused) instanceof FocusableTVCardView)

@@ -181,7 +181,7 @@ public class TorrentBlocklistDialogPreference extends Preference {
             protected void onPreExecute() {
                 mProgressBarDialog.show();
                 // this can only be after the show otherwise null
-                TextView textView = mProgressBarDialog.findViewById(R.id.textView);
+                TextView textView = mProgressBarDialog.findViewById(R.id.tv_movie_title);
                 textView.setText(R.string.blocklist_downloading);
                 ProgressBar progressBar = mProgressBarDialog.findViewById(R.id.progressBar);
                 progressBar.setIndeterminate(true);

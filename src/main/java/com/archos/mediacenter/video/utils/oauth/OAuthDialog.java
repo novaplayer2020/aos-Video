@@ -103,7 +103,7 @@ public class OAuthDialog extends Dialog {
         mProgressBarDialog.setContentView(R.layout.progressbar_dialog);
 		mProgressBarDialog.setCanceledOnTouchOutside(true);
 		mProgressBarDialog.setCancelable(true);
-        TextView textView = mProgressBarDialog.findViewById(R.id.textView);
+        TextView textView = mProgressBarDialog.findViewById(R.id.tv_movie_title);
 		textView.setText(R.string.loading);
 		ProgressBar progressBar = mProgressBarDialog.findViewById(R.id.progressBar);
 		progressBar.setIndeterminate(true);

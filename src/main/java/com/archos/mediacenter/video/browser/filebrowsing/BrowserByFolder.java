@@ -23,7 +23,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -737,7 +736,7 @@ abstract public class BrowserByFolder extends BrowserByVideoObjects implements
             builder.setCancelable(true);
             AlertDialog mProgressBarAlertDialog = builder.create();
             mProgressBarAlertDialog.show();
-            TextView textView = mProgressBarAlertDialog.findViewById(R.id.textView);
+            TextView textView = mProgressBarAlertDialog.findViewById(R.id.tv_movie_title);
             textView.setText(R.string.loading);
             ProgressBar progressBar = mProgressBarAlertDialog.findViewById(R.id.progressBar);
             progressBar.setIndeterminate(true);
