@@ -67,7 +67,9 @@
     <color name="divider">#B6B6B6</color>
     <color name="ccl_mini_upcoming_background">@color/primary</color>
 
-    <color name="private_mode">#01142A</color>
+    <color name="private_mode">#001220</color>
 
     <color name="side_bar_background">#001220</color>
+    <color name="rating_text">#a2960e</color>
+    <color name="details_text">#1c3241</color>
 </resources>
