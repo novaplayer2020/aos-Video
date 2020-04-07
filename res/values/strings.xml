@@ -915,5 +915,6 @@
     <string name="app_id_surface">C44FB232</string>
 
     <string name="refreshrate_failed">Failed to set desired refresh rate</string>
+    <string name="inception">Inception</string>
 
 </resources>
