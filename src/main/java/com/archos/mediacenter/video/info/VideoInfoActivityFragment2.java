@@ -22,10 +22,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -108,6 +110,7 @@ import com.archos.mediascraper.ScraperTrailer;
 import com.archos.mediascraper.ShowTags;
 import com.archos.mediascraper.VideoTags;
 import com.archos.mediascraper.xml.MovieScraper3;
+import com.bumptech.glide.Glide;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
@@ -116,6 +119,7 @@ import com.squareup.picasso.Picasso;
 
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -269,6 +273,8 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
     private int mHeaderHeight;
     private boolean mIsPortraitMode;
 
+
+    private TextView mTagLine;
     private TextView mResumeTime;
 
     private static boolean isFileManagerServiceBound = false;
@@ -297,6 +303,11 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
     private TextView mYearOfMovie;
 
     private ImageView mStudioImage;
+
+    private long MOVIE_ID;
+
+    private TextView mVotes;
+    private TextView mReleaseDate;
 
     public static VideoInfoActivityFragment2 getInstance(Video video, Uri path, long id, boolean forceVideoSelection){
         if (DBG) Log.d(TAG,"VideoInfoActivityFragment for uri=" + path);
@@ -353,6 +364,9 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
         mFABManager = new FABAnimationManager(mGenericPlayButton,mFABHideAnimation,mFABShowAnimation);
         mTitleBar = (Toolbar) mRoot.findViewById(R.id.titlebar);
         mTitleBarContent = mRoot.findViewById(R.id.titlebar_content);
+
+        mTagLine = mRoot.findViewById(R.id.tv_tag_line);
+        mReleaseDate = mRoot.findViewById(R.id.tv_release_date);
 
         mSecondaryTitleBar = (ViewGroup) mRoot.findViewById(R.id.secondary_titlebar);
         if(mSecondaryTitleBar!=null) {
@@ -461,6 +475,7 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
         mRating = mRoot.findViewById(R.id.iv_rating);
 
         mStudioImage = mRoot.findViewById(R.id.studio_image);
+        mVotes = mRoot.findViewById(R.id.tv_votes);
 
         mPlayIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -469,7 +484,7 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
             }
         });
 
-        mClassificationIv.setBackground(getResources().getDrawable(R.drawable.mpaa_g));
+        //mClassificationIv.setBackground(getResources().getDrawable(R.drawable.mpaa_g));
 
         if(getActivity().getIntent()!=null){
             mPlayerType = getActivity().getIntent().getIntExtra(VideoInfoActivity.EXTRA_PLAYER_TYPE,-1);
@@ -496,9 +511,12 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
             mSelectCurrentVideo = bundle.getBoolean(EXTRA_FORCE_VIDEO_SELECTION,false);
             mIsLaunchFromPlayer = getActivity().getIntent().getExtras().getBoolean(EXTRA_LAUNCHED_FROM_PLAYER, false);
             Video video = (Video) bundle.get(EXTRA_VIDEO);
+
             if(video == null){
 
                 mVideoIdFromPlayer = bundle.getLong(EXTRA_VIDEO_ID, -1);
+                Log.d("asdfsadf", String.valueOf(mVideoIdFromPlayer));
+                MOVIE_ID = mVideoIdFromPlayer;
                 if (mVideoIdFromPlayer == -1) {
                     mPath = bundle.getString(EXTRA_VIDEO_PATH);
                 }
@@ -774,13 +792,10 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
                 mPosterImageView.setImageBitmap(mBitmap);
                 mPosterImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-                mBigThumbnail.setImageBitmap(mBitmap);
                 mBigThumbnail.setScaleType(ImageView.ScaleType.CENTER_CROP);
             } else {
-                mPosterImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.filetype_new_video_poster));
                 mPosterImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-                mBigThumbnail.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.filetype_new_video_poster));
                 mBigThumbnail.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             }
@@ -1705,13 +1720,11 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
                     mPosterImageView.setImageBitmap(result.first);
                     mPosterImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-                    mBigThumbnail.setImageBitmap(result.first);
                     mBigThumbnail.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 } else {
                     mPosterImageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.filetype_new_video_poster));
                     mPosterImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-                    mBigThumbnail.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.filetype_new_video_poster));
                     mBigThumbnail.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 }
                 setBackground();
@@ -1729,6 +1742,7 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
         private final Activity mActivity;
         private List<ScraperTrailer> mTrailers;
 
+        private GetMovieDetails.MovieDetailsModel m;
 
         public FullScraperTagsTask(Activity activity){
             mActivity = activity;
@@ -1748,6 +1762,9 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
                 mTrailers = tags.getAllTrailersInDb(getActivity());
             else
                 mTrailers = null;
+
+            Log.d("MyStringValue", String.valueOf(MOVIE_ID));
+
             return tags;
         }
 
@@ -1767,6 +1784,7 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
                 }
                 setTextOrHideContainer(mPlotTextView, plot, mPlotTextView);
                 setTextOrHideContainer(mGenreTextView, genres, mGenreTextView);
+
                 // Cast
                 String cast = tags.getActorsFormatted();
                 // If cast is null and this is an episode, get the cast of the Show
@@ -1776,6 +1794,7 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
                     ShowTags showTags = ((EpisodeTags) tags).getShowTags();
                     cast = showTags != null ? showTags.getActorsFormatted() : null;
                 }
+
                 setTextOrHideContainer(mCastTextView, cast, mCastTextView, mCastTextViewTitle);
                 setTextOrHideContainer(mScrapDirector, tags.getDirectorsFormatted(), mScrapDirector, mScrapDirectorTitle);
                 String date = null;
@@ -1799,6 +1818,46 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
                     mTMDBId = tags.getOnlineId();
                     date = ((MovieTags) tags).getYear()+"";
                     studio = ((MovieTags) tags).getStudiosFormatted();
+
+                    long movieId = ((MovieTags) tags).getId();
+
+                    GetMovieDetails.getDetails(tags.getImdbId(), mActivity, new GetMovieDetails.MovieDetailsListener() {
+                        @Override
+                        public void onDetailsRecovered(GetMovieDetails.MovieDetailsModel movieDetailsModel) {
+                            m = movieDetailsModel;
+                            setTextOrHideContainer(mTagLine, movieDetailsModel.getTagLine(), mTagLine);
+                            setTextOrHideContainer(mVotes, "(" + movieDetailsModel.getNumberOfVotes() + " votes)", mVotes);
+                            setTextOrHideContainer(mReleaseDate, movieDetailsModel.getReleaseDate(), mReleaseDate);
+
+                            Glide.with(mActivity)
+                                    .load(movieDetailsModel.getBackdrop())
+                                    .into(mBigThumbnail);
+
+                            try
+                            {
+                                // get input stream
+                                Log.d("StudioName", movieDetailsModel.getStudioImageName() + ".png");
+
+                                    InputStream ims = mActivity.getAssets().open(("studios/" + movieDetailsModel.getStudioImageName() + ".png").toLowerCase());
+                                // load image as Drawable
+                                Drawable d = Drawable.createFromStream(ims, null);
+                                // set image to ImageView
+                                mStudioImage.setImageDrawable(d);
+                                ims .close();
+                            }
+                            catch(IOException ex)
+                            {
+                                Log.d("SuperError", ex.toString());
+                            }
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
+
+
                 }
                 mIMDBId = tags.getImdbId();
                 if(mIMDBId==null||mIMDBId.isEmpty())
@@ -1876,6 +1935,20 @@ public class VideoInfoActivityFragment2 extends Fragment implements LoaderManage
                 }
             }
         }
+    }
+
+    public Bitmap getBitmapFromAssets(String fileName) {
+        AssetManager assetManager = getActivity().getAssets();
+
+        InputStream istr = null;
+        try {
+            istr = assetManager.open(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Bitmap bitmap = BitmapFactory.decodeStream(istr);
+
+        return bitmap;
     }
 
     private void setTextOrHideContainer(TextView textView, String text, View... toHideOrShow) {
